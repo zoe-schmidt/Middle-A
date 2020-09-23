@@ -19,9 +19,6 @@ Route::get('/prueba', function () {
     return view('prueba');
 });
 
-
-Route::get('/prueba', 'paisesController@pais');
+Route::get('/prueba', 'paisesController@listadoPaises');
 
 Route::get('/', 'pruebaController@listado');
-
-Route::get('/', 'paisesController@listadoPaises');

@@ -5,12 +5,10 @@
     <title></title>
   </head>
   <body>
-    <p>HOLIII</p>
-
-
+    <p>Información país</p>
     <?php foreach ($paises as $pais): ?>
       <p><?php
-        $pais[nombre];?>
+        $pais[nombre]?>
       </p>
     <?php endforeach; ?>
   </body>
