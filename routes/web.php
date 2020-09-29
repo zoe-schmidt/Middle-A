@@ -26,12 +26,19 @@ route::post("/cargarFotosFestivales/{id}","festivalesController@cargarFotosFesti
 
 route::get("/hospedaje", "hospedajeController@listadoHospedajes");
 
+route::get("/cargarFotosHospedajes/{id}", "hospedajeController@editarHospedajes");
+
+route::post("/cargarFotosHospedajes/{id}","hospedajeController@cargarFotosHospedajes");
+
 route::get("/lugaresTuristicos", "lugaresTuristicosController@listadoLugaresTuristicos");
+
+route::get("/cargarFotosLugaresTuristicos/{id}", "lugaresTuristicosController@editarLugaresTuristicos");
 
 route::get("/tribus", "tribuController@listadoTribus");
 
 route::get("/cargarFotosTribu/{id}", "tribuController@editarTribu");
 
 route::post("/cargarFotosTribu/{id}", "tribuController@cargarFotos");
+
 
 

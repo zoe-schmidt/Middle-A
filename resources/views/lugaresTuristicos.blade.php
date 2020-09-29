@@ -9,6 +9,7 @@
             <p>{{$lugar->Nombre}}</P>
         </li>
             
+        <button><a href="/cargarFotosLugaresTuristicos/{{$lugar->id}}">cargar Fotos</a></button>
         @endforeach
     </ul>
 </body>
