@@ -15,10 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/prueba', function () {
-    return view('prueba');
-});
 
-Route::get('/prueba', 'paisesController@listadoPaises');
+route::get("/prueba", "paisesController@listadoPaises");
 
-Route::get('/', 'pruebaController@listado');
+route::get("/festivales", "festivalesController@listadoFestivales");
+
+route::get("/cargarFotosFestivales/{id}", "festivalesController@editarFestivales");
+
+route::post("/cargarFotosFestivales/{id}","festivalesController@cargarFotosFestival");
+
+route::get("/hospedaje", "hospedajeController@listadoHospedajes");
+
+route::get("/lugaresTuristicos", "lugaresTuristicosController@listadoLugaresTuristicos");
+
+route::get("/tribus", "tribuController@listadoTribus");
+
+route::get("/cargarFotosTribu/{id}", "tribuController@editarTribu");
+
+route::post("/cargarFotosTribu/{id}", "tribuController@cargarFotos");
+
+
