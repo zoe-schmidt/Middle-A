@@ -34,11 +34,26 @@ route::get("/lugaresTuristicos", "lugaresTuristicosController@listadoLugaresTuri
 
 route::get("/cargarFotosLugaresTuristicos/{id}", "lugaresTuristicosController@editarLugaresTuristicos");
 
+route::post("/cargarFotosLugaresTuristicos/{id}","lugaresTuristicosController@cargarFotosLugaresTuristicos");
+
 route::get("/tribus", "tribuController@listadoTribus");
 
 route::get("/cargarFotosTribu/{id}", "tribuController@editarTribu");
 
 route::post("/cargarFotosTribu/{id}", "tribuController@cargarFotos");
+
+route::get("/naturaleza","naturalezacontroller@listadoNaturaleza");
+
+route::get("/cargarFotosNaturaleza/{id}","naturalezaController@editarNaturaleza");
+
+route::post("cargarFotosNaturaleza/{id}", "naturalezaController@cargarFotosNaturaleza");
+
+route::get("/highlights", "highlightController@listado");
+
+route::get("/cargarIconos/{id}","highlightController@editarIconos");
+
+route::post("cargarIconos/{id}", "highlightController@cargarIconos");
+
 
 
 
