@@ -37,9 +37,9 @@ class hospedajeController extends Controller
 
           $hospedajes=hospedaje::find($id);
           
-          Storage::delete("/public" . $hospedajes->foto1);
-          Storage::delete("/public" . $hospedajes->foto2);
-          Storage::delete("/public" . $hospedajes->foto3);
+          Storage::delete("/storage" . $hospedajes->foto1);
+          Storage::delete("/storage" . $hospedajes->foto2);
+          Storage::delete("/storage" . $hospedajes->foto3);
 
           $hospedajeViejo["foto1"]=$req->file("foto1")->store("storage", "public");
           $hospedajeViejo["foto2"]=$req->file("foto2")->store("storage", "public");

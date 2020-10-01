@@ -19,7 +19,11 @@
         <li><p>{{$festival->descripcion_foto2}}</p></li>
         <li><img src="/storage/{{$festival->foto3}}" alt=""></li>
         <li><p>{{$festival->descripcion_foto3}}</p></li>
-            
+        
+        <p>nombre del pais</p>
+        @if($festival->descripcion)
+        <li>{{$festival->pais->nombre}}</li>
+        @endif
         <button><a href="/cargarFotosFestivales/{{$festival->id}}">cargar Fotos</a></button>
         @endforeach
     </ul>
