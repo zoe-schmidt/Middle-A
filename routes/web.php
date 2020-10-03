@@ -18,42 +18,49 @@ Route::get('/', function () {
 
 route::get("/prueba", "paisesController@listadoPaises");
 
-route::get("/festivales", "festivalesController@listadoFestivales");
+Route::group(['middleware' => 'auth'], function () {
+    
 
-route::get("/cargarFotosFestivales/{id}", "festivalesController@editarFestivales");
+    route::get("/festivales", "festivalesController@listadoFestivales");
 
-route::post("/cargarFotosFestivales/{id}","festivalesController@cargarFotosFestival");
+    route::get("/cargarFotosFestivales/{id}", "festivalesController@editarFestivales");
 
-route::get("/hospedaje", "hospedajeController@listadoHospedajes");
+    route::post("/cargarFotosFestivales/{id}","festivalesController@cargarFotosFestival");
 
-route::get("/cargarFotosHospedajes/{id}", "hospedajeController@editarHospedajes");
+    route::get("/hospedaje", "hospedajeController@listadoHospedajes");
 
-route::post("/cargarFotosHospedajes/{id}","hospedajeController@cargarFotosHospedajes");
+    route::get("/cargarFotosHospedajes/{id}", "hospedajeController@editarHospedajes");
 
-route::get("/lugaresTuristicos", "lugaresTuristicosController@listadoLugaresTuristicos");
+    route::post("/cargarFotosHospedajes/{id}","hospedajeController@cargarFotosHospedajes");
 
-route::get("/cargarFotosLugaresTuristicos/{id}", "lugaresTuristicosController@editarLugaresTuristicos");
+    route::get("/lugaresTuristicos", "lugaresTuristicosController@listadoLugaresTuristicos");
 
-route::post("/cargarFotosLugaresTuristicos/{id}","lugaresTuristicosController@cargarFotosLugaresTuristicos");
+    route::get("/cargarFotosLugaresTuristicos/{id}", "lugaresTuristicosController@editarLugaresTuristicos");
 
-route::get("/tribus", "tribuController@listadoTribus");
+    route::post("/cargarFotosLugaresTuristicos/{id}","lugaresTuristicosController@cargarFotosLugaresTuristicos");
 
-route::get("/cargarFotosTribu/{id}", "tribuController@editarTribu");
+    route::get("/tribus", "tribuController@listadoTribus")->middleware("auth");
 
-route::post("/cargarFotosTribu/{id}", "tribuController@cargarFotos");
+    route::get("/cargarFotosTribu/{id}", "tribuController@editarTribu");
 
-route::get("/naturaleza","naturalezacontroller@listadoNaturaleza");
+    route::post("/cargarFotosTribu/{id}", "tribuController@cargarFotos");
 
-route::get("/cargarFotosNaturaleza/{id}","naturalezaController@editarNaturaleza");
+    route::get("/naturaleza","naturalezacontroller@listadoNaturaleza");
 
-route::post("cargarFotosNaturaleza/{id}", "naturalezaController@cargarFotosNaturaleza");
+    route::get("/cargarFotosNaturaleza/{id}","naturalezaController@editarNaturaleza");
 
-route::get("/highlights", "highlightController@listado");
+    route::post("cargarFotosNaturaleza/{id}", "naturalezaController@cargarFotosNaturaleza");
 
-route::get("/cargarIconos/{id}","highlightController@editarIconos");
+    route::get("/highlights", "highlightController@listado");
 
-route::post("cargarIconos/{id}", "highlightController@cargarIconos");
+    route::get("/cargarIconos/{id}","highlightController@editarIconos");
+
+    route::post("cargarIconos/{id}", "highlightController@cargarIconos");
+
+});
 
 
 
+Auth::routes(['register' => false]);
 
+Route::get('/home', 'HomeController@index')->name('home');
