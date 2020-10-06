@@ -19,11 +19,11 @@
         <ul>
           @foreach ($pais->festival as $festivales)
 
-            <li><img src="/storage/{{$festivales->foto1}}" alt="imagen de festival"></li>
+            <li><img src="storage/{{$festivales->foto1}}" alt="imagen de festival"></li>
             <li><p>{{$festivales->descripcion_foto1}}</p></li>
-            <li><img src="/storage/{{$festivales->foto2}}" alt="imagen de festival"></li>
+            <li><img src="storage/{{$festivales->foto2}}" alt="imagen de festival"></li>
             <li><p>{{$festivales->descripcion_foto2}}</p></li>
-            <li><img src="/storage/{{$festivales->foto3}}" alt="imagen de festival"></li>
+            <li><img src="storage/{{$festivales->foto3}}" alt="imagen de festival"></li>
             <li><p>{{$festivales->descripcion_foto3}}</p></li>
           
             @endforeach
@@ -87,11 +87,11 @@
          @foreach ($pais->naturalezas as $naturaleza)
 
             <li><img src="/storage/{{$naturaleza->foto1}}" alt="imagen de festival"></li>
-            <li><p>{{$tribu->descripcion_foto1}}</p></li>
+            <li><p>{{$naturaleza->descripcion_foto1}}</p></li>
             <li><img src="/storage/{{$naturaleza->foto2}}" alt="imagen de festival"></li>
-            <li><p>{{$tribu->descripcion_foto2}}</p></li>
+            <li><p>{{$naturaleza->descripcion_foto2}}</p></li>
             <li><img src="/storage/{{$naturaleza->foto3}}" alt="imagen de festival"></li>
-            <li><p>{{$tribu->descripcion_foto3}}</p></li>
+            <li><p>{{$naturaleza->descripcion_foto3}}</p></li>
           
             @endforeach
 
