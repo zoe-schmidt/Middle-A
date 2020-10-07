@@ -24,49 +24,55 @@ class tribuController extends Controller
         return view("/cargarFotosTribu",$vac);
       }
 
+
       public function cargarFotos(request $req,$id){
         
-      
-        $tribuvieja=request()->except('_token');
-     
-          $tribus=tribu::find($id);
+          $tribuVieja=request()->except("_token");
+
+
+          if($req->hasFile("foto1","foto2","foto3")){
+
+           $tribus=tribu::find($id);
+
+           $imagen="/storage/".$tribus->foto1;
+           $imagen2="/storage/".$tribus->foto2;
+           $imagen3="/storage/".$tribus->foto3;
+
+
+            $ruta=str_replace("\\", "/" ,public_path());
+            $ruta2=str_replace("\\", "/",public_path());
+            $ruta3=str_replace("\\", "/",public_path());
 
          
-          $imagen="/storage/" . $tribus->foto1;
-          $imagen2= "/storage/".$tribus->foto2;
-          $imagen3= "/storage/". $tribus->foto3;
 
-          $ruta=str_replace("\\", '/' ,public_path());
-
-
-          if(file_exists($ruta. $imagen)){
-
-            
-            unlink($ruta.$imagen);
-            unlink($ruta.$imagen2);
-            unlink($ruta.$imagen3);
-            
-            $tribuvieja["foto1"]=$req->file("foto1")->store("storage","public");
-            $tribuvieja["foto2"]=$req->file("foto2")->store("storage","public");
-            $tribuvieja["foto3"]=$req->file("foto3")->store("storage","public");
-
-            $tribuEditada=tribu::where('id','=',$id)->update($tribuvieja);
-
-            return redirect("/tribus");
-
-          }else{
-            
-            $tribuvieja["foto1"]=$req->file("foto1")->store("storage","public");
-            $tribuvieja["foto2"]=$req->file("foto2")->store("storage","public");
-            $tribuvieja["foto3"]=$req->file("foto3")->store("storage","public");
-
-            $tribuEditada=tribu::where('id','=',$id)->update($tribuvieja);
-
-            return redirect("/tribus");
+            if(file_exists($ruta.$imagen)){
            
-          };
+            unlink($ruta.$imagen);
+            unlink($ruta2.$imagen2);
+            unlink($ruta3.$imagen3);
+
+            $tribuVieja["foto1"]=$req->file("foto1")->store("uploads","public");
+            $tribuVieja["foto2"]=$req->file("foto2")->store("uploads","public" );
+            $tribuVieja["foto3"]=$req->file("foto3")->store("uploads","public");
+
+            $tribuEditada=tribu::where('id','=',$id)->update($tribuVieja);
+
+            return redirect("/tribus");
+            }else{
+             
+            
+            $tribuVieja["foto1"]=$req->file("foto1")->store("uploads","public");
+            $tribuVieja["foto2"]=$req->file("foto2")->store("uploads","public" );
+            $tribuVieja["foto3"]=$req->file("foto3")->store("uploads","public");
+
+            $tribuEditada=tribu::where('id','=',$id)->update($tribuVieja);
+
+            return redirect("/tribus");
+          }
 
     }
+
+  }
 
 }  
 
