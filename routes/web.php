@@ -16,10 +16,9 @@ Route::get('/', function () {
 });
 
 
-route::get("/prueba", "paisesController@listadoPaises");
+route::get("/paises", "paisesController@listadoPaises")->name("paises");
 
 Route::group(['middleware' => 'auth'], function () {
-    
 
     route::get("/festivales", "festivalesController@listadoFestivales");
 

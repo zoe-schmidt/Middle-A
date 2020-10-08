@@ -13,7 +13,7 @@ class paisesController extends Controller
 
       $vac=compact("paises");
 
-      return view("/prueba",$vac);
+      return view("/paises",$vac);
     }
 
 }

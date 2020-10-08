@@ -38,36 +38,33 @@ class tribuController extends Controller
            $imagen2="/storage/".$tribus->foto2;
            $imagen3="/storage/".$tribus->foto3;
 
-
             $ruta=str_replace("\\", "/" ,public_path());
             $ruta2=str_replace("\\", "/",public_path());
             $ruta3=str_replace("\\", "/",public_path());
 
-         
 
             if(file_exists($ruta.$imagen)){
-           
-            unlink($ruta.$imagen);
-            unlink($ruta2.$imagen2);
-            unlink($ruta3.$imagen3);
 
-            $tribuVieja["foto1"]=$req->file("foto1")->store("uploads","public");
-            $tribuVieja["foto2"]=$req->file("foto2")->store("uploads","public" );
-            $tribuVieja["foto3"]=$req->file("foto3")->store("uploads","public");
+        
+              unlink($ruta.$imagen);
+              unlink($ruta2.$imagen2);
+              unlink($ruta3.$imagen3);
+            
+              $tribuVieja["foto1"]=$req->file("foto1")->store("uploads","public");
+              $tribuVieja["foto2"]=$req->file("foto2")->store("uploads","public" );
+              $tribuVieja["foto3"]=$req->file("foto3")->store("uploads","public");
 
-            $tribuEditada=tribu::where('id','=',$id)->update($tribuVieja);
+              $tribuEditada=tribu::where('id','=',$id)->update($tribuVieja);
 
             return redirect("/tribus");
             }else{
-             
-            
-            $tribuVieja["foto1"]=$req->file("foto1")->store("uploads","public");
-            $tribuVieja["foto2"]=$req->file("foto2")->store("uploads","public" );
-            $tribuVieja["foto3"]=$req->file("foto3")->store("uploads","public");
+              $tribuVieja["foto1"]=$req->file("foto1")->store("uploads","public");
+              $tribuVieja["foto2"]=$req->file("foto2")->store("uploads","public" );
+              $tribuVieja["foto3"]=$req->file("foto3")->store("uploads","public");
 
-            $tribuEditada=tribu::where('id','=',$id)->update($tribuVieja);
+              $tribuEditada=tribu::where('id','=',$id)->update($tribuVieja);
 
-            return redirect("/tribus");
+              return redirect("/tribus");
           }
 
     }

@@ -34,23 +34,45 @@ class lugaresTuristicosController extends Controller
         if($req->hasFile('foto1','foto2',"foto3","foto4")){
 
           $lugares=lugaresturisticos::find($id);
-          
-          Storage::delete("storage/" . $lugares->foto1);
-          Storage::delete("storage/" . $lugares->foto2);
-          Storage::delete("storage/" . $lugares->foto3);
-          Storage::delete("storage/" . $lugares->foto4);
 
-          $lugarViejo["foto1"]=$req->file("foto1")->store("storage","public");
-          $lugarViejo["foto2"]=$req->file("foto2")->store("storage","public");
-          $lugarViejo["foto3"]=$req->file("foto3")->store("storage","public");
-          $lugarViejo["foto4"]=$req->file("foto4")->store("storage","public");
-        };
+          $imagen="/storage/".$lugares->foto1;
+          $imagen2="/storage/".$lugares->foto2;
+          $imagen3="/storage/".$lugares->foto3;
+          $imagen4="/storage/".$lugares->foto4;
+         
+
+          $ruta=str_replace("\\", "/" ,public_path());
+          $ruta2=str_replace("\\", "/",public_path());
+          $ruta3=str_replace("\\", "/",public_path());
+          $ruta4=str_replace("\\", "/",public_path());
 
 
-        $lugarEditado=lugaresturisticos::where('id','=',$id)->update($lugarViejo);
+           if(file_exists($ruta.$imagen)){
+      
+             unlink($ruta.$imagen);
+             unlink($ruta2.$imagen2);
+             unlink($ruta3.$imagen3);
+             unlink($ruta4.$imagen4);
+           
+             $lugarViejo["foto1"]=$req->file("foto1")->store("uploads","public");
+             $lugarViejo["foto2"]=$req->file("foto2")->store("uploads","public" );
+             $lugarViejo["foto3"]=$req->file("foto3")->store("uploads","public");
+             $lugarViejo["foto4"]=$req->file("foto4S")->store("uploads","public");
 
-          
+             $hlugarEditado=lugaresTuristicos::where('id','=',$id)->update($lugarViejo);
 
-        return redirect("/lugaresTuristicos");
-  }
+            return redirect("/lugaresTuristicos");
+              }else{
+                    $lugarViejo["foto1"]=$req->file("foto1")->store("uploads","public");
+                    $lugarViejo["foto2"]=$req->file("foto2")->store("uploads","public" );
+                    $lugarViejo["foto3"]=$req->file("foto3")->store("uploads","public");
+                    $lugarViejo["foto4"]=$req->file("foto4")->store("uploads","public");
+
+                    $lugarEditado=lugaresTuristicos::where('id','=',$id)->update($lugarViejo);
+
+                  return redirect("/lugaresTuristicos");
+                }
+        }
+      }
+
 }

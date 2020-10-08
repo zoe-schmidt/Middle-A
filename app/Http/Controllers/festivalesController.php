@@ -35,21 +35,40 @@ class festivalesController extends Controller
         if($req->hasFile('foto1','foto2',"foto3")){
 
           $festivales=festivales::find($id);
-          
-          Storage::delete("/public" . $festivales->foto1);
-          Storage::delete("/public" . $festivales->foto2);
-          Storage::delete("/public" . $festivales->foto3);
 
-          $festivalViejo["foto1"]=$req->file("foto1")->store("storage", "public");
-          $festivalViejo["foto2"]=$req->file("foto2")->store("storage", "public");
-          $festivalViejo["foto3"]=$req->file("foto3")->store("storage", "public");
-        };
+          $imagen="/storage/".$festivales->foto1;
+          $imagen2="/storage/".$festivales->foto2;
+          $imagen3="/storage/".$festivales->foto3;
+         
+
+          $ruta=str_replace("\\", "/" ,public_path());
+          $ruta2=str_replace("\\", "/",public_path());
+          $ruta3=str_replace("\\", "/",public_path());
 
 
-        $festivalEditado=festivales::where('id','=',$id)->update($festivalViejo);
+           if(file_exists($ruta.$imagen)){
+      
+             unlink($ruta.$imagen);
+             unlink($ruta2.$imagen2);
+             unlink($ruta3.$imagen3);
+           
+             $festivalesViejos["foto1"]=$req->file("foto1")->store("uploads","public");
+             $festivalesViejos["foto2"]=$req->file("foto2")->store("uploads","public" );
+             $festivalesViejos["foto3"]=$req->file("foto3")->store("uploads","public");
 
-          
+             $festivalesEditados=festivales::where('id','=',$id)->update($festivalesViejos);
 
-        return redirect("/festivales");
+            return redirect("/festivales");
+              }else{
+                    $festivalesViejos["foto1"]=$req->file("foto1")->store("uploads","public");
+                    $festivalesViejos["foto2"]=$req->file("foto2")->store("uploads","public" );
+                    $festivalesViejos["foto3"]=$req->file("foto3")->store("uploads","public");
+
+                    $festivalEditado=festivales::where('id','=',$id)->update($festivalesViejos);
+
+                    return redirect("/festivales");
+                }
+          }
+        }
   }
-}
+

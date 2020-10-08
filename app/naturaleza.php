@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class naturaleza extends Model
 {
     public $table="naturaleza";
+    public $timestamps=false;
     public $guarded = [];
 
         public function pais(){

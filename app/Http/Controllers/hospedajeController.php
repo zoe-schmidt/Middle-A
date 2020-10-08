@@ -36,23 +36,42 @@ class hospedajeController extends Controller
         if($req->hasFile('foto1','foto2',"foto3")){
 
           $hospedajes=hospedaje::find($id);
-          
-          Storage::delete("/storage" . $hospedajes->foto1);
-          Storage::delete("/storage" . $hospedajes->foto2);
-          Storage::delete("/storage" . $hospedajes->foto3);
 
-          $hospedajeViejo["foto1"]=$req->file("foto1")->store("storage", "public");
-          $hospedajeViejo["foto2"]=$req->file("foto2")->store("storage", "public");
-          $hospedajeViejo["foto3"]=$req->file("foto3")->store("storage", "public");
-        };
+          $imagen="/storage/".$hospedajes->foto1;
+          $imagen2="/storage/".$hospedajes->foto2;
+          $imagen3="/storage/".$hospedajes->foto3;
+         
+
+          $ruta=str_replace("\\", "/" ,public_path());
+          $ruta2=str_replace("\\", "/",public_path());
+          $ruta3=str_replace("\\", "/",public_path());
 
 
-        $hospedajeEditado=hospedaje::where('id','=',$id)->update($hospedajeViejo);
+           if(file_exists($ruta.$imagen)){
+      
+             unlink($ruta.$imagen);
+             unlink($ruta2.$imagen2);
+             unlink($ruta3.$imagen3);
+           
+             $hospedajeViejo["foto1"]=$req->file("foto1")->store("uploads","public");
+             $hospedajeViejo["foto2"]=$req->file("foto2")->store("uploads","public" );
+             $hospedajeViejo["foto3"]=$req->file("foto3")->store("uploads","public");
 
-          
+             $hospedajeEditado=hospedaje::where('id','=',$id)->update($hospedajeViejo);
 
-        return redirect("/hospedaje");
-  }
+            return redirect("/hospedaje");
+              }else{
+                    $hospedajeViejo["foto1"]=$req->file("foto1")->store("uploads","public");
+                    $hospedajeViejo["foto2"]=$req->file("foto2")->store("uploads","public" );
+                    $hospedajeViejo["foto3"]=$req->file("foto3")->store("uploads","public");
+
+                    $hospedajeEditado=hospedaje::where('id','=',$id)->update($hospedajeViejo);
+
+                  return redirect("/hospedaje");
+                }
+          }
+      }
+
 }
 
 

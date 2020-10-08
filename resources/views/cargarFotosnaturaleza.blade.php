@@ -15,7 +15,7 @@
         <br>
         <label for="foto3">foto N° 3</label>
         <input type="file" name="foto3" id="foto3">
-
+       
         <input type="submit" value="cargar fotos">
         
     </form>
